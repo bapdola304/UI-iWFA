@@ -47,7 +47,7 @@ class Login extends Component {
 
                 <View style={styles.container}>
                     <Form>
-                        <Item floatingLabel {errorUsername ? error : ''}>
+                        <Item floatingLabel error = {errorUsername ? true : false}>
                             <Label>Username</Label>
                             <Input
                                 underlineColorAndroid={
