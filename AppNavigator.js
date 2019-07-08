@@ -1,9 +1,9 @@
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { StackNavigator , createBottomTabNavigator } from 'react-navigation';
 import LoginScreen from './screens/LoginScreen'
-import Home from './screens/Home'
-const LoginStack = createStackNavigator({
+import Main from './screens/Main'
+const LoginStack = StackNavigator ({
     Login: { screen: LoginScreen },
-    Home : { screen: Home }   
+    Home : { screen: Main }   
   },
   {
     initialRouteName: 'Login',
