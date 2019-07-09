@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native'
-class Setting extends Component {
+class Setting extends React.Component {
     render() {
         return (
            <Text>Setting page</Text>

@@ -1,5 +1,4 @@
 import { Icon } from 'native-base';
-import React from 'react';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import HomeTab from './tabs/Home'
 import ScheduleTab from './tabs/Schedule'
@@ -11,6 +10,7 @@ const color = {
   ACTIVE : '#147efb',
   INACTIVE : '#ccc'
 }
+
 const HomeStack = createStackNavigator({
     HomeTab
 });

@@ -3,7 +3,11 @@ import Login from '../components/Login'
 import {  View } from 'react-native'
 class LoginScreen extends Component {
 
-
+    static navigationOptions = {
+        headerStyle: {
+          height : 0
+        },
+      };
     onLogin = (userLogin) => {
         
         if(userLogin.username == 'admin' && userLogin.password == '123123')
@@ -11,7 +15,7 @@ class LoginScreen extends Component {
         else
             alert('error')
     }
-    render() {
+    render() {       
         return (
             <View>
                 <Login onPress = {(userLogin) => this.onLogin(userLogin)}/>
@@ -19,5 +23,4 @@ class LoginScreen extends Component {
         );
     }
 }
-
 export default LoginScreen;

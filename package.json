@@ -5,10 +5,12 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "react-devtools": "react-devtools"
   },
   "dependencies": {
     "expo": "^33.0.0",
+    "jsonwebtoken": "^8.5.1",
     "native-base": "^2.12.1",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
@@ -17,7 +19,8 @@
     "react-navigation": "^3.11.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.1.1"
+    "babel-preset-expo": "^5.1.1",
+    "react-devtools": "^3.6.1"
   },
   "private": true
 }

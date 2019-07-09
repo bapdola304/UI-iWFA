@@ -6,14 +6,15 @@ import AppNavigator from './screens/Main'
 
 import { StackNavigator } from 'react-navigation';
 import Main from './screens/Main';
-const AppContainer = createAppContainer(AppNavigator);
+import RootStack from './AppNavigator'
+const AppContainer = createAppContainer(RootStack);
 let auth = true;
 export default function App() {
   state = {
     auth : true
   }
   return (
-    state.auth ? <Login onPress/> : <AppContainer/> 
+        <AppContainer/> 
   );
 }
 

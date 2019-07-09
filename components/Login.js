@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, Button, TouchableOpacity } from 'react-native'
-import { Container, Header, Content, Form, Item, Input, Label, CheckBox } from 'native-base';
-import logo from '../assets/iwfa.png'
+import { Container, Header, Content, Form, Item, Input, Label, CheckBox, Icon } from 'native-base';
+import logo from '../assets/background_login.png'
 import loginValidate from '../validate/login.validate'
-const BLUE = "#48d9d9";
-const LIGHT_GRAY = "#D3D3D3";
+
+
 class Login extends Component {
     constructor(props) {
         super(props)
@@ -13,8 +13,8 @@ class Login extends Component {
             checked: false,
             username: null,
             password: null,
-            errorUsername : null,
-            errorPassword : null
+            errorUsername: null,
+            errorPassword: null
         }
     }
     handleFocus = event => {
@@ -23,50 +23,42 @@ class Login extends Component {
     }
     onLogin = () => {
         let userLogin = {
-            username : this.state.username,
-            password : this.state.password
+            username: this.state.username,
+            password: this.state.password
         }
         let error = loginValidate(userLogin);
-        if(Object.keys(error).length > 0){
+        if (Object.keys(error).length > 0) {
             this.setState({
-                errorUsername : error.username,
-                errorPassword : error.password
+                errorUsername: error.username,
+                errorPassword: error.password
             });
-        }else{
+        } else {
             this.props.onPress(userLogin)
         }
     }
     render() {
-        console.log(this.props);
-        let {  onPress } = this.props 
+        let { onPress } = this.props
         const { isFocused, checked, errorUsername, errorPassword } = this.state;
-        
         return (
-            <View>
+            <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                 <Image source={logo} style={styles.img} />
 
                 <View style={styles.container}>
                     <Form>
-                        <Item floatingLabel error = {errorUsername ? true : false}>
+                        <Item floatingLabel error={errorUsername ? true : false}>
                             <Label>Username</Label>
                             <Input
-                                underlineColorAndroid={
-                                    isFocused ? BLUE : LIGHT_GRAY
-                                }
-                                onFocus={this.handleFocus}
                                 onChangeText={(username) => this.setState({ username })}
                             />
+                   
                         </Item>
-                        <Item floatingLabel last>
+                        <Item floatingLabel error={errorPassword ? true : false}>
                             <Label>Password</Label>
                             <Input
-                                underlineColorAndroid={
-                                    isFocused ? BLUE : LIGHT_GRAY
-                                }
-                                onFocus={this.handleFocus}
                                 onChangeText={(password) => this.setState({ password })}
-                                secureTextEntry = {true}
+                                secureTextEntry={true}
                             />
+                           
                         </Item>
                     </Form>
                     <View style={styles.wrap}>
@@ -78,17 +70,20 @@ class Login extends Component {
                             />
                             <Text style={styles.text}>Keep me signed in</Text>
                         </View>
-                        <View style={styles.forgotpass}>
-                            <Text style={styles.text}>Forgot password</Text>
-                        </View>
+
                     </View>
                     <TouchableOpacity>
                         <Button
+                            style = {styles.button}
                             onPress={this.onLogin}
                             title="Login"
                             color="#48d9d9"
+                            borderRadius = {20}
                         />
                     </TouchableOpacity>
+                </View>
+                <View style={styles.forgotpass}>
+                    <Text style={styles.text}>Forgot password ?</Text>
                 </View>
             </View>
         );
@@ -96,13 +91,25 @@ class Login extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 80,
-        paddingLeft: 40,
-        paddingRight: 30
+        paddingTop: 40,
+        paddingLeft: 30,
+        paddingRight: 30,
+        paddingBottom : 30,
+        width: '80%',
+        position: 'absolute',
+        top: '80%',
+        shadowColor: '#000',
+        backgroundColor: '#fff',
+        borderRadius: 20,
+        borderColor : 'grey',
+        shadowRadius: 10,
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.5,
+        borderWidth: 0.5
     },
     text: {
         fontFamily: 'Roboto',
-        fontSize: 18,
+        fontSize: 14,
         fontWeight: 'bold',
         marginLeft: 15
     },
@@ -126,6 +133,13 @@ const styles = StyleSheet.create({
         marginRight: 0,
         alignItems: 'center',
         color: '#48d9d9',
+        position: 'absolute',
+        bottom : '-65%',
+        left : '15%'
+
+    },
+    button : {
+        borderRadius : 20
     }
 })
 export default Login;
