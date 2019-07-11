@@ -1,29 +1,29 @@
 const listMenu = [
     {
         name : 'SOS',
-        img : require('../../assets/imgmenu/sos-icon.png'),
+        img : require('../../assets/icon/sos.png'),
         color : 'red'
     },
     {
         name : 'Team SOS',
-        img : require('../../assets/imgmenu/ic_team_sos.png')
+        img : require('../../assets/icon/teamsos.png')
     },
     {
         name : 'Overtime',
-        img : require('../../assets/imgmenu/ic_overtime_master_layout.png')
+        img : require('../../assets/icon/overtime.png')
     },
     {
         name : 'Notifications',
-        img : require('../../assets/imgmenu/ic_notification_master_layout.png')
+        img : require('../../assets/icon/bell.png')
     },
     {
         name : 'Leave',
-        img : require('../../assets/imgmenu/ic_leave_master_layout.png'),
+        img : require('../../assets/icon/leave2.png'),
         router : 'Leave'
     },
     {
         name : 'Timesheet',
-        img : require('../../assets/imgmenu/ic_timesheet_master_layout.png')
+        img : require('../../assets/icon/timesheet.png')
     }
     
 ]

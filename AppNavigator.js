@@ -2,7 +2,7 @@ import { StackNavigator, createStackNavigator , createBottomTabNavigator} from '
 import { Animated, Easing, Platform } from 'react-native';
 
 import LoginScreen from './screens/LoginScreen'
-import HomeTab from './screens/tabs/Home'
+import HomeTab from './screens/Home'
 import ScheduleTab from './screens/tabs/Schedule'
 import ClockTab from './screens/tabs/Clock'
 import SettingTab from './screens/tabs/Setting'

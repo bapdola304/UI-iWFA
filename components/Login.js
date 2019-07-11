@@ -3,7 +3,6 @@ import { View, Text, Image, StyleSheet, Button, TouchableOpacity } from 'react-n
 import { Container, Header, Content, Form, Item, Input, Label, CheckBox, Icon } from 'native-base';
 import logo from '../assets/background_login.png'
 import loginValidate from '../validate/login.validate'
-import logo2 from '../assets/logo2.png'
 import Reinput from 'reinput'
 
 
@@ -45,7 +44,7 @@ class Login extends Component {
         return (
             <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                 <Image source={logo} style={styles.img} />
-                <Image source={logo2} style={styles.logo} />
+            
 
                 <View style={styles.container}>
 
@@ -112,7 +111,7 @@ const styles = StyleSheet.create({
         paddingBottom: 30,
         width: '80%',
         position: 'absolute',
-        top: '80%',
+        top: '50%',
         shadowColor: '#000',
         backgroundColor: '#fff',
         borderRadius: 20,
@@ -128,7 +127,8 @@ const styles = StyleSheet.create({
         marginLeft: 15
     },
     img: {
-        width: '100%'
+        width: '100%',
+        height : '80%'
     },
     wrap: {
         flexDirection: 'row',
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         color: '#48d9d9',
         position: 'absolute',
-        bottom: '-65%',
+        bottom: '-30%',
         left: '15%'
 
     },
