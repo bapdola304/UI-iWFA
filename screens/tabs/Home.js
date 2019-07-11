@@ -4,15 +4,19 @@ import { FlatList, View, StyleSheet, Image, ScrollView } from 'react-native'
 import ListMenu from '../../components/ListMenu'
 import dataListMenu from '../menuconfig/menuconfig'
 
+
 export default class Home extends Component {
     static navigationOptions = {
-        tabBarIcon: ({ tintColor }) => {
-            return <Icon name="md-basket" style={{ color: tintColor }} />
+        headerStyle: {
+          height : 0
         },
         header : null
-    }
+      };
     componentWillMount() {
 
+    }
+    onRiderect = (router) =>{
+        this.props.navigation.navigate(router)
     }
     render() {
     
@@ -23,7 +27,7 @@ export default class Home extends Component {
                 data={dataListMenu}
                 renderItem={(item) =>
                     <View style={styles.warp}>
-                        <ListMenu menuItem={item} />
+                        <ListMenu menuItem={item} onPress = {(router) => this.onRiderect(router)}/>
                     </View>
                 }
 
@@ -43,7 +47,7 @@ const styles = StyleSheet.create({
     container: {
         paddingTop : 10,
         paddingHorizontal : 8,
-        backgroundColor : '#dddddf',
+        backgroundColor : '#f7f7f7',
         height : '100%'
 
     },

@@ -1,9 +1,13 @@
 import { StackNavigator, createStackNavigator , createBottomTabNavigator} from 'react-navigation';
+import { Animated, Easing, Platform } from 'react-native';
+
 import LoginScreen from './screens/LoginScreen'
 import HomeTab from './screens/tabs/Home'
 import ScheduleTab from './screens/tabs/Schedule'
 import ClockTab from './screens/tabs/Clock'
 import SettingTab from './screens/tabs/Setting'
+import Leave from './screens/menudetail/LeaveScreen'
+import LeaveRequest from './screens//menudetail/LeaveRequestScreen'
 
 const HomeStack = createStackNavigator({
   HomeTab
@@ -12,7 +16,8 @@ navigationOptions =  {
     tabBarLabel: 'Home',
     tabBarIcon: ({ focused }) => {
       return <Icon name="md-home" style={{ color: focused }} />
-    }
+    },
+    header : null
   }
 );
 
@@ -55,14 +60,47 @@ SettingStack.navigationOptions = {
 const AppNavigator = createBottomTabNavigator({
   HomeStack
 });
+let SlideFromRight = (index, position, width) => {
+  const translateX = position.interpolate({
+    inputRange: [index - 1, index],
+    outputRange: [width, 0],
+  })
+
+  return { transform: [ { translateX } ] }
+};
+const TransitionConfiguration = () => {
+  return {
+    transitionSpec: {
+      duration: 750,
+      easing: Easing.out(Easing.poly(4)),
+      timing: Animated.timing,
+      useNativeDriver: true,
+    },
+    screenInterpolator: (sceneProps) => {
+      const { layout, position, scene } = sceneProps;
+      const width = layout.initWidth;
+      const height = layout.initHeight;
+      const { index, route } = scene
+      const params = route.params || {}; // <- That's new
+      const transition = params.transition || 'default'; // <- That's new
+      return {
+        default: SlideFromRight(index, position, width),
+
+      }[transition];
+    },
+  }
+}
 
 const RootStack = createStackNavigator({
   Login: { screen: LoginScreen },
-  Home: { screen: AppNavigator }
+  Home: { screen: HomeTab },
+  Leave: { screen: Leave },
+  LeaveRequest : { screen : LeaveRequest }
 },
-  {
-    initialRouteName: 'Login'
-  });
+{
+  initialRouteName: 'Login',
+  transitionConfig: TransitionConfiguration
+});
 //   const HomeStack = createStackNavigator({
 //     Home
 //   });

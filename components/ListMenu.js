@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { View, Image, StyleSheet, Button, TouchableOpacity } from 'react-native'
 import { Container, Header, Content, Card, CardItem, Body, Text } from 'native-base';
 class ListMenu extends Component {
-
+    onPress = () =>{
+        this.props.onPress(this.props.menuItem.item.router)
+    }
     render() {
         let { menuItem } = this.props;
-        console.log(menuItem);
+        console.log(this.props.navigation);
 
         return (
-            <TouchableOpacity activeOpacity ={0.3}>
+            <TouchableOpacity activeOpacity ={0.3} onPress={this.onPress}>
                 <View style={styles.container}>
                     <Image style={styles.imgMenu} source={menuItem.item.img} />
                     <Text style={styles.textMenu}>{menuItem.item.name}</Text>
@@ -21,7 +23,7 @@ class ListMenu extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginBottom: 20,
+        marginBottom: 10,
         padding: 20,
         shadowColor: '#000',
         backgroundColor: '#fff',

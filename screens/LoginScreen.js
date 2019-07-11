@@ -7,8 +7,10 @@ class LoginScreen extends Component {
         headerStyle: {
           height : 0
         },
+        header : null
       };
     onLogin = (userLogin) => {
+        console.log(this.props.navigation);
         
         if(userLogin.username == 'admin' && userLogin.password == '123123')
             this.props.navigation.navigate('Home')

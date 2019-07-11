@@ -3,6 +3,9 @@ import { View, Text, Image, StyleSheet, Button, TouchableOpacity } from 'react-n
 import { Container, Header, Content, Form, Item, Input, Label, CheckBox, Icon } from 'native-base';
 import logo from '../assets/background_login.png'
 import loginValidate from '../validate/login.validate'
+import logo2 from '../assets/logo2.png'
+import Reinput from 'reinput'
+
 
 
 class Login extends Component {
@@ -42,25 +45,36 @@ class Login extends Component {
         return (
             <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                 <Image source={logo} style={styles.img} />
+                <Image source={logo2} style={styles.logo} />
 
                 <View style={styles.container}>
-                    <Form>
-                        <Item floatingLabel error={errorUsername ? true : false}>
-                            <Label>Username</Label>
-                            <Input
-                                onChangeText={(username) => this.setState({ username })}
-                            />
-                   
-                        </Item>
-                        <Item floatingLabel error={errorPassword ? true : false}>
-                            <Label>Password</Label>
-                            <Input
-                                onChangeText={(password) => this.setState({ password })}
-                                secureTextEntry={true}
-                            />
-                           
-                        </Item>
-                    </Form>
+
+
+                    <Reinput
+                        label='Account'
+                        height={200}
+                        fontSize={18}
+                        maxHeight={500}
+                        underlineActiveColor='#48d9d9'
+                        labelActiveColor='#48d9d9'
+                        onChangeText={(username) => this.setState({ username })}
+
+                    />
+                    <Reinput
+                        label='Password'
+                        height={200}
+                        fontSize={18}
+                        maxHeight={500}
+                        underlineActiveColor='#48d9d9'
+                        labelActiveColor='#48d9d9'
+                        onChangeText={(password) => this.setState({ password })}
+                        secureTextEntry={true}
+                    />
+
+
+
+
+
                     <View style={styles.wrap}>
                         <View style={styles.wrapcheckbox}>
                             <CheckBox
@@ -74,17 +88,18 @@ class Login extends Component {
                     </View>
                     <TouchableOpacity>
                         <Button
-                            style = {styles.button}
+                            style={styles.button}
                             onPress={this.onLogin}
                             title="Login"
                             color="#48d9d9"
-                            borderRadius = {20}
+                            borderRadius={20}
                         />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.forgotpass}>
                     <Text style={styles.text}>Forgot password ?</Text>
                 </View>
+
             </View>
         );
     }
@@ -94,21 +109,20 @@ const styles = StyleSheet.create({
         paddingTop: 40,
         paddingLeft: 30,
         paddingRight: 30,
-        paddingBottom : 30,
+        paddingBottom: 30,
         width: '80%',
         position: 'absolute',
         top: '80%',
         shadowColor: '#000',
         backgroundColor: '#fff',
         borderRadius: 20,
-        borderColor : 'grey',
+        borderColor: 'grey',
         shadowRadius: 10,
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.5,
         borderWidth: 0.5
     },
     text: {
-        fontFamily: 'Roboto',
         fontSize: 14,
         fontWeight: 'bold',
         marginLeft: 15
@@ -134,12 +148,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         color: '#48d9d9',
         position: 'absolute',
-        bottom : '-65%',
-        left : '15%'
+        bottom: '-65%',
+        left: '15%'
 
     },
-    button : {
-        borderRadius : 20
+    button: {
+        borderRadius: 20
+    },
+    logo: {
+        position: 'absolute',
+        top: '45%'
     }
 })
 export default Login;

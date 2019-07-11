@@ -18,7 +18,8 @@ const listMenu = [
     },
     {
         name : 'Leave',
-        img : require('../../assets/imgmenu/ic_leave_master_layout.png')
+        img : require('../../assets/imgmenu/ic_leave_master_layout.png'),
+        router : 'Leave'
     },
     {
         name : 'Timesheet',

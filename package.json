@@ -9,14 +9,20 @@
     "react-devtools": "react-devtools"
   },
   "dependencies": {
+    "@material-ui/core": "^4.2.0",
     "expo": "^33.0.0",
     "jsonwebtoken": "^8.5.1",
     "native-base": "^2.12.1",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
+    "react-native-datepicker": "^1.7.2",
+    "react-native-modalbox": "^1.7.1",
+    "react-native-textinput-effects": "^0.4.2",
+    "react-native-ui-xg": "0.0.6",
     "react-native-web": "^0.11.4",
-    "react-navigation": "^3.11.0"
+    "react-navigation": "^3.11.0",
+    "reinput": "^3.6.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.1.1",
