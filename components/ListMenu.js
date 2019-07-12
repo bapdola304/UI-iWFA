@@ -26,21 +26,21 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginBottom: 10,
-        padding: 15,
-        shadowColor: '#000',
-        backgroundColor: '#fff',
-        borderRadius: 4,
-        borderRadius: 10,
-        shadowRadius: 10,
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.5,
-        elevation: 1,
+        padding: 20,
         width : '80%',
         marginLeft : '13%',
         flexDirection : 'column',
          justifyContent: 'center',
-           borderBottomWidth: 5,
-        borderBottomColor: '#ccc'
+        borderBottomColor: '#ccc',
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: '#fff',
+        shadowColor: '#000',
+        borderBottomWidth : 2,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 1,
 
 
 

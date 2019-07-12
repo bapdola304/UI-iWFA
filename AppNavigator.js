@@ -8,7 +8,7 @@ import ClockTab from './screens/tabs/Clock'
 import SettingTab from './screens/tabs/Setting'
 import Leave from './screens/menudetail/LeaveScreen'
 import LeaveRequest from './screens//menudetail/LeaveRequestScreen'
-
+import ClockTime from './screens/ClockTime'
 const HomeStack = createStackNavigator({
   HomeTab
 },
@@ -95,10 +95,11 @@ const RootStack = createStackNavigator({
   Login: { screen: LoginScreen },
   Home: { screen: HomeTab },
   Leave: { screen: Leave },
-  LeaveRequest : { screen : LeaveRequest }
+  LeaveRequest : { screen : LeaveRequest },
+  ClockTime : { screen : ClockTime }
 },
 {
-  initialRouteName: 'Login',
+  initialRouteName: 'Home',
   transitionConfig: TransitionConfiguration
 });
 //   const HomeStack = createStackNavigator({
