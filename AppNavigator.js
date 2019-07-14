@@ -2,13 +2,14 @@ import { StackNavigator, createStackNavigator , createBottomTabNavigator} from '
 import { Animated, Easing, Platform } from 'react-native';
 
 import LoginScreen from './screens/LoginScreen'
-import HomeTab from './screens/Home'
+import HomeTab from './screens//Home1'
 import ScheduleTab from './screens/tabs/Schedule'
 import ClockTab from './screens/tabs/Clock'
 import SettingTab from './screens/tabs/Setting'
 import Leave from './screens/menudetail/LeaveScreen'
 import LeaveRequest from './screens//menudetail/LeaveRequestScreen'
 import ClockTime from './screens/ClockTime'
+import Notification from './screens/NotificationsScreen'
 const HomeStack = createStackNavigator({
   HomeTab
 },
@@ -96,10 +97,11 @@ const RootStack = createStackNavigator({
   Home: { screen: HomeTab },
   Leave: { screen: Leave },
   LeaveRequest : { screen : LeaveRequest },
-  ClockTime : { screen : ClockTime }
+  ClockTime : { screen : ClockTime },
+  Notification : { screen : Notification }
 },
 {
-  initialRouteName: 'Home',
+  initialRouteName: 'Login',
   transitionConfig: TransitionConfiguration
 });
 //   const HomeStack = createStackNavigator({

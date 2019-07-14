@@ -2,45 +2,56 @@ import React, { Component } from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, Button, TouchableHighlight, Alert } from 'react-native'
 import { Container, Header, Content, Card, CardItem, Text, Badge, Left, Right, Thumbnail, Icon } from 'native-base';
 import Modal from 'react-native-modalbox';
-class Leave extends Component {
+import Swipeout from 'react-native-swipeout';
+
+export default class Notification extends Component {
     onPress = () =>{
-        this.props.onPress(this.props.data)
+        Alert.alert('Alert', 
+        'Are you sure want to delete?',
+        [
+            {text : 'No', onPress : () => console.log('cancel'), style : 'cancel'},
+            {text : 'Yes', onPress : () => console.log(this.props.dataNotifi.item.content)}
+        ]
+        )
     }
-
     render() {
-
+        let id = 2;
+        const swipeSetting = {
+            id : 2,
+            autoClose : true,
+            right : [
+                {
+                    onPress : this.onPress,
+                    text : 'Delete', type : 'delete'
+                }
+            ]
+        }
         return (
-            <TouchableOpacity activeOpacity={0.3} onPress = {this.onPress}>
+            <Swipeout {...swipeSetting}>
+            <TouchableOpacity activeOpacity={0.3}>
                 <View style={styles.container}>
                     <View style={styles.wraptime}>
                         <View style={styles.timeRow}>
                             <View style={styles.startday}>
-                                <Text style={styles.textDay} >Jul 06, 2019</Text>
-                                <Text>04 : 50 PM</Text>
+                                <Image source = {{uri : 'https://avatars2.githubusercontent.com/u/1203949?s=180&v=4'}} style = {{width : 50, height : 50}}/>
                             </View>
-                            <View>
-                                <Text>─</Text>
-                            </View>
+
                             <View style={styles.endday}>
-                                <Text style={styles.textDay} >Jul 09, 2019</Text>
-                                <Text>05 : 50 PM</Text>
+                                <Text style={styles.textDay} >{this.props.dataNotifi.item.content}</Text>
+                                <Text>8 mins ago</Text>
                             </View>
                         </View>
                         <View style={styles.statusRow}>
                             <Badge warning>
-                                <Text>Pending</Text>
+                                <Text>new</Text>
                             </Badge>
                         </View>
                     </View>
-                    <View style={styles.reasonRow}>
-                        <Icon name="md-sad" style={styles.iconRow} />
-                        <Text style={styles.reasonText}>Sick Leave (8.0) </Text>
-                    </View>
-
                 </View>
 
                
             </TouchableOpacity>
+            </Swipeout>
 
 
         );
@@ -48,14 +59,12 @@ class Leave extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 16,
+        paddingTop : 10,
         padding: 10,
-        borderBottomWidth: 5,
+        borderBottomWidth: 2,
         borderBottomColor: '#ccc',
         shadowColor: '#000',
-        backgroundColor: '#fff',
-        borderRadius: 4,
-        borderRadius: 10,
+        backgroundColor: '#f7f7f7',
         shadowRadius: 10,
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.5,
@@ -70,7 +79,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 8
     },
     endday: {
-        paddingHorizontal: 8
+        paddingHorizontal: 8,
+        width : '80%'
     },
     timeRow: {
         flex: 1,
@@ -78,24 +88,9 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center'
     },
-    reasonRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        fontSize: 8,
-        paddingHorizontal: 16,
-        paddingTop: 10
-    },
-    reasonText: {
-        paddingHorizontal: 8,
-        fontSize: 12
-    },
-    iconRow: {
-        fontSize: 12
-    },
     textDay: {
-        color: '#48d9d9'
+        color: '#48d9d9',
+    
     },
     
 })
-
-export default Leave;

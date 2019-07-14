@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Button, TouchableOpacity } from 'react-native'
+import { View, Text, Image, StyleSheet, Button, Dimensions } from 'react-native'
 import { Icon, Picker, Form, Item, Label, Input } from "native-base";
-
+import { Dropdown } from 'react-native-material-dropdown';
 import DatePicker from 'react-native-datepicker';
+import br from '../../assets/br12.jpg'
+var { height, width } = Dimensions.get('screen');
+
 class LeaveRequestScreen extends Component {
+    static navigationOptions = {
+        headerStyle: {
+            backgroundColor: '#4cb4fc'
+        },
+        title: 'Leaves Request'
+    };
     constructor(props) {
         super(props)
         //set value in state for initial date
@@ -21,19 +30,29 @@ class LeaveRequestScreen extends Component {
         });
     }
     render() {
-      
-        
+        let data = [{
+            value: 'Banana',
+          }, {
+            value: 'Mango',
+          }, {
+            value: 'Pear',
+          }];
         return (
             <View style={styles.container}>
-                <View style = {{backgroundColor : '#ccc', padding : 10}}>
-                    <View style = {{padding : 20,backgroundColor : 'white'}}>
+                <Image  source = {br} style = {{height : height/6, width : '100%'}}/>
+             
+                    {/* <View style={{ padding: 20, backgroundColor: '#ccc', position : 'absolute', top : '10%', width : '100%' }}>
                         <Text>Hours Avaiable</Text>
-                    </View>
-                </View>
+                    </View> */}
+             <View style = {{position : 'absolute', width : '100%', height : height,  paddingHorizontal : 20, backgroundColor : '#f7f7f7', top : '15%', borderTopLeftRadius : 30, borderTopRightRadius : 30}}>
                 <View style={styles.paddingTop20}>
-                    <Text style={styles.textDate}>Leave Type *</Text>
-
-                    <Item picker style={{ borderStyle: 'dashed' }}>
+                    <Text style = {{textAlign : 'center', fontSize : 16, fontWeight : 'bold'}}>Hours Avaiable 100.0</Text>
+                    {/* <Text style={styles.textDate}>Leave Type *</Text> */}
+                    <Dropdown
+                        label='Leave Type *'
+                        data={data}
+                    />
+                    {/* <Item picker style={{ borderStyle: 'dashed' }}>
                         <Picker
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}
@@ -50,7 +69,7 @@ class LeaveRequestScreen extends Component {
                             <Picker.Item label="Credit Card" value="key3" />
                             <Picker.Item label="Net Banking" value="key4" />
                         </Picker>
-                    </Item>
+                    </Item> */}
 
                 </View>
                 <View style={styles.dateRow}>
@@ -71,7 +90,7 @@ class LeaveRequestScreen extends Component {
                         style={styles.dataPickerRow}
                         date={this.state.startTime} //initial date from state
                         mode="time" //The enum of date, datetime and time
-                        placeholder="End Date *"
+                        placeholder="Start Time *"
                         confirmBtnText="Confirm"
                         cancelBtnText="Cancel"
                         customStyles={styleInputDate}
@@ -127,13 +146,14 @@ class LeaveRequestScreen extends Component {
                     borderRadius={20}
                 />
             </View>
+            </View>
         );
     }
 }
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 8,
-        width: '100%'
+        flex : 1,
+        alignItems : 'center'
     },
     dateRow: {
         flexDirection: 'row'
@@ -158,6 +178,12 @@ const styles = StyleSheet.create({
     },
     paddingTop20: {
         paddingTop: 20
+    },
+    button : {
+        height : 50,
+        marginTop : 30,
+        position : 'absolute',
+        bottom : 0
     }
 })
 const styleInputDate = {

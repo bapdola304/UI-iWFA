@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet, Button, TouchableOpacity } from 'react-native'
-import { Container, Header, Content, Card, CardItem, Body, Text } from 'native-base';
+import { Container, Header, Content, Card, CardItem, Body, Text, Badge } from 'native-base';
 export default class ListMenu extends Component {
-    onPress = () =>{
+    onPress = () => {
         this.props.onPress(this.props.menuItem.item.router)
     }
     render() {
         let { menuItem } = this.props;
-        console.log(this.props.navigation);
 
         return (
             <View>
-                <TouchableOpacity activeOpacity ={0.3} onPress={this.onPress}>
+                <TouchableOpacity activeOpacity={0.3} onPress={this.onPress}>
                     <View style={styles.container}>
                         <Image style={styles.imgMenu} source={menuItem.item.img} />
                         <Text style={styles.textMenu}>{menuItem.item.name}</Text>
+                        { menuItem.item.router == 'Notification' ? <Badge><Text>2</Text></Badge> : <Text></Text>}
                     </View>
+               
+                    
                 </TouchableOpacity>
             </View>
 
@@ -25,22 +27,22 @@ export default class ListMenu extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginTop: 10,
         marginBottom: 10,
         padding: 20,
-        width : '80%',
-        marginLeft : '13%',
-        flexDirection : 'column',
-         justifyContent: 'center',
+        paddingHorizontal: 20,
+        flexDirection: 'column',
+        justifyContent: 'center',
         borderBottomColor: '#ccc',
         borderWidth: 1,
-        borderRadius: 10,
+        borderRadius: 5,
         borderColor: '#fff',
         shadowColor: '#000',
-        borderBottomWidth : 2,
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.8,
         shadowRadius: 2,
         elevation: 1,
+        backgroundColor: '#ffffff'
 
 
 
@@ -52,17 +54,18 @@ const styles = StyleSheet.create({
         backgroundColor: 'red'
     },
     imgMenu: {
-        width: 50,
-        height: 50,
-        position : 'absolute',
-        left : -20
+        width: 54,
+        height: 54,
+        position: 'absolute',
+        left: -20
 
     },
     textMenu: {
         marginTop: 10,
-        fontSize: 18,
-        fontWeight: '500',
-        marginLeft : '15%',
-        color : '#48d9d9'
+        fontSize: 15,
+        fontWeight: 'bold',
+        marginLeft: '20%',
+        color: '#323551',
+        width: '120%'
     }
 })

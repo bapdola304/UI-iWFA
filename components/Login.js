@@ -44,11 +44,8 @@ class Login extends Component {
         return (
             <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                 <Image source={logo} style={styles.img} />
-            
-
+        
                 <View style={styles.container}>
-
-
                     <Reinput
                         label='Account'
                         height={200}
@@ -56,7 +53,23 @@ class Login extends Component {
                         maxHeight={500}
                         underlineActiveColor='#48d9d9'
                         labelActiveColor='#48d9d9'
-                        onChangeText={(username) => this.setState({ username })}
+                        onChangeText={(username) => {
+                            let error = loginValidate(username,'Username');
+                            console.log(error);
+                            
+                            if (Object.keys(error).length > 0) {                               
+                                this.setState({
+                                    errorUsername: error.Username
+                                });
+                                
+                            }else{
+                                this.setState({
+                                    errorUsername: null
+                                });
+                            }
+                        }
+                        }
+                        error = {errorUsername ? errorUsername : false}                      
 
                     />
                     <Reinput
@@ -68,11 +81,9 @@ class Login extends Component {
                         labelActiveColor='#48d9d9'
                         onChangeText={(password) => this.setState({ password })}
                         secureTextEntry={true}
+                        error = {errorPassword ? errorPassword : false} 
                     />
-
-
-
-
+                   
 
                     <View style={styles.wrap}>
                         <View style={styles.wrapcheckbox}>

@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { FlatList, View, StyleSheet, Image, ScrollView, TouchableOpacity, Text, Button } from 'react-native'
+import { FlatList, View, StyleSheet, Image, ScrollView, TouchableOpacity, Text, Button, Dimensions } from 'react-native'
 import logo from '../assets/LoginBg.png'
 import carendarIcon from '../assets/icon/timesheet.png'
+var {height, width} = Dimensions.get('screen');
 class ClockTime extends Component {
+    static navigationOptions = {
+       header : null
+      };
     getDate = () => {
         var today = new Date();
         var weekday = new Array(7);
@@ -33,7 +37,7 @@ class ClockTime extends Component {
         return (
             <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                 <View style={styles.img}>
-                    <Image source={logo} />
+                    <Image source={logo} style = {{height : height/2}}/>
                 </View>
 
                 <View style={styles.wrapDate}>
@@ -69,13 +73,11 @@ class ClockTime extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 40,
-        paddingLeft: 30,
-        paddingRight: 30,
-        paddingBottom: 30,
+        marginTop : 30,
+        padding : 20,
         width: '80%',
         position: 'absolute',
-        top: '70%',
+        top: '60%',
         shadowColor: '#000',
         backgroundColor: '#fff',
         borderRadius: 20,
@@ -97,8 +99,7 @@ const styles = StyleSheet.create({
         marginLeft: 15
     },
     img: {
-        width: '100%',
-        borderBottomLeftRadius: 300
+        width: '100%'
     },
     logo: {
         position: 'absolute',
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     },
     wrapDate: {
         position: 'absolute',
-        top: '30%',
+        top: '35%',
     },
     time: {
         fontSize: 50,

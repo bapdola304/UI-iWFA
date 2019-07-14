@@ -6,6 +6,12 @@ import { Badge,Icon, Text } from 'native-base';
 
 import { hide } from 'expo/build/launch/SplashScreen';
 class LeaveScreen extends Component {
+    static navigationOptions = {
+        headerStyle: {
+          backgroundColor : '#4cb4fc'
+        },
+        title : 'My Leaves'
+      };
     state = {
         dataModal: null
     }
