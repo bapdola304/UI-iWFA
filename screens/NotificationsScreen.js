@@ -34,6 +34,8 @@ class NotificationsScreen extends Component {
         dataOne={data}
         dataTwo={data2}
         tabOne={Notification}
+        Component = {[Notification]}
+        tabName = {['Confirmation','Information']}
         tabOneText = 'Confirmation'
         tabTwoText = 'Information'
       />

@@ -24,7 +24,8 @@ const listMenu = [
     },
     {
         name : 'Timesheet',
-        img : require('../../assets/menuicon/calendar.png')
+        img : require('../../assets/menuicon/calendar.png'),
+        router : 'MySchedule'
     }
     
 ]

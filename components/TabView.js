@@ -67,9 +67,6 @@ export default class TabView extends Component {
             xTabTwo,
             translateX,
             active,
-            translateXTabOne,
-            translateXTabTwo,
-            translateY
         } = this.state;
         return (
             <View style={{ flex: 1 }}>
@@ -170,53 +167,25 @@ export default class TabView extends Component {
                     </View>
 
                     <ScrollView>
-                        { active === 0 ?
-                        
-                        <Animated.View
-                            style={{
-
-                                transform: [
-                                    {
-                                        translateX: translateXTabOne
-                                    }
-                                ]
-                            }}
-                            onLayout={event =>
-                                this.setState({
-                                    translateY: event.nativeEvent.layout.height
-                                })
-                            }
-                        >
-                            <Text>Select</Text>
-                            {<FlatList
-
+                        {active === 0 ?
+                        <FlatList
                                 data={this.props.dataOne}
                                 renderItem={(item) =>
                                     <this.props.tabOne dataNotifi={item} onPress={this.props.onPress} />
                                 }
-
-                            />}
-                        </Animated.View>
+                        />
+                        
                         :
-                        <Animated.View
-                            style={{
-                           
-                                transform: [
-                                    {
-                                        translateX: translateXTabTwo
-                                    }
-                                ]
-                            }}
-                        >
-                            {<FlatList
+
+                            <FlatList
 
                                 data={this.props.dataTwo}
                                 renderItem={(item) =>
                                     <this.props.tabOne dataNotifi={item} />
                                 }
 
-                            />}
-                        </Animated.View>
+                            />
+
                         }
                     </ScrollView>
                 </View>
