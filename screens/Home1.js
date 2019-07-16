@@ -5,7 +5,7 @@ import ListMenu from '../components/ListMenu'
 import dataListMenu from './menuconfig/menuconfig'
 import logo from '../assets/menuicon/alarm-clock.png'
 import back from '../assets/background_login.png'
-import br from '../assets/br11.jpg'
+import br from '../assets/br15.jpg'
 var { height, width } = Dimensions.get('screen');
 export default class Home1 extends Component {
     static navigationOptions = {
@@ -30,8 +30,8 @@ export default class Home1 extends Component {
                     </TouchableOpacity>
                 </View>
             </View> */}
-            <View style={styles.fixed}>
-                <Image source={br} style={{ height: height/4, width : '100%' }} />
+            <View>
+                <Image source={br} style={{ height: height, width : '100%' }} />
             </View>
 
 
@@ -65,14 +65,14 @@ export default class Home1 extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#f7f7f7',
+        // backgroundColor: '#4b6cb7',
+        // backgroundImage : 'url(https://66.media.tumblr.com/20b34e8d12d4230f9b362d7feb148c57/tumblr_oiwytz4dh41tf8vylo1_1280.pnj)',
         height: '100%',
         position: 'relative'
     },
     warp: {
         flex: 1,
         paddingHorizontal: 8,
-        marginLeft: "5%"
     },
     imgMenu: {
         width: 64,
@@ -149,16 +149,17 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
+        top: '20%',
 
     },
     fixedList: {
         position: 'absolute',
-        top: '20%',
+        top: '10%',
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor : '#f7f7f7', 
-        borderTopLeftRadius : 40, 
-        borderTopRightRadius : 40
+        // backgroundColor : '#f7f7f7', 
+        // borderTopLeftRadius : 40, 
+        // borderTopRightRadius : 40
     }
 }) 

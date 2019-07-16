@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet, Button, TouchableOpacity } from 'react-native'
+import { View, Image, StyleSheet, Button, TouchableOpacity ,Dimensions } from 'react-native'
 import { Container, Header, Content, Card, CardItem, Body, Text, Badge } from 'native-base';
+var { height, width } = Dimensions.get('screen');
 export default class ListMenu extends Component {
     onPress = () => {
         this.props.onPress(this.props.menuItem.item.router)
     }
     render() {
+        console.log(height);
+        
         let { menuItem } = this.props;
 
         return (
@@ -27,8 +30,8 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 10,
         marginBottom: 10,
-        padding: 20,
-        paddingHorizontal: 20,
+        padding: height/15,
+        paddingHorizontal: 8,
         flexDirection: 'column',
         justifyContent: 'center',
         borderBottomColor: '#ccc',
@@ -36,10 +39,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderColor: '#fff',
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
+        shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.8,
         shadowRadius: 2,
-        elevation: 1,
+        elevation: 5,
         backgroundColor: '#ffffff'
 
 
@@ -55,15 +58,16 @@ const styles = StyleSheet.create({
         width: 54,
         height: 54,
         position: 'absolute',
-        left: -20
+        left: 20,
+        top : 10
 
     },
     textMenu: {
-        marginTop: 10,
-        fontSize: 15,
+        fontSize: 16,
         fontWeight: 'bold',
-        marginLeft: '20%',
         color: '#323551',
-        width: '120%'
+        position: 'absolute',
+        right: 10,
+        bottom : 10,
     }
 })

@@ -8,59 +8,35 @@ import {
     Image,
     Dimensions,
     FlatList,
-    StyleSheet
+    StyleSheet,
+
 } from "react-native";
 import { Badge, CheckBox } from 'native-base';
+import { Button } from 'react-native-paper';
+
 import Notification from '../components/Notification'
 const { width } = Dimensions.get("window");
 
 export default class TabView extends Component {
     state = {
-        active: 0,
-        xTabOne: 0,
-        xTabTwo: 0,
+
         translateX: new Animated.Value(0),
         data: { dataOne: [], dataTwo: [] },
         notificationType: 'confirm',
-        isShow: false
+        isShow: false,
+        isSelectAll: false
     };
 
     handleSlide = (type, notificationType) => {
         let {
-            active,
-            xTabOne,
-            xTabTwo,
             translateX,
-            translateXTabOne,
-            translateXTabTwo
         } = this.state;
         Animated.spring(translateX, {
             toValue: type,
             duration: 100
         }).start();
-        if (active === 0) {
-            Animated.parallel([
-                Animated.spring(translateXTabOne, {
-                    toValue: 0,
-                    duration: 100
-                }).start(),
-                Animated.spring(translateXTabTwo, {
-                    toValue: width,
-                    duration: 100
-                }).start()
-            ]);
-        } else {
-            Animated.parallel([
-                Animated.spring(translateXTabOne, {
-                    toValue: -width,
-                    duration: 100
-                }).start(),
-                Animated.spring(translateXTabTwo, {
-                    toValue: 0,
-                    duration: 100
-                }).start()
-            ]);
-        }
+
+
         this.setState({ notificationType, data: this.props.data });
     };
     componentWillMount() {
@@ -98,7 +74,9 @@ export default class TabView extends Component {
         // });
         // this.props.notificationActions.deleteNotifications(itemChecked);
     }
-    handleSelectAll(checked = false) {
+    handleSelectAll(checked) {
+        console.log(checked);
+
         let notifications = this.state.data;
         let { dataOne, dataTwo } = notifications;
         let updateSelected = (items = []) => {
@@ -107,7 +85,7 @@ export default class TabView extends Component {
             }
             return items;
         }
-       switch (this.state.notificationType) {
+        switch (this.state.notificationType) {
             case 'confirm':
                 confirmations = updateSelected(dataOne);
                 break;
@@ -115,7 +93,7 @@ export default class TabView extends Component {
                 informations = updateSelected(dataTwo);
                 break;
         }
-        this.setState({ isSelectAll: checked, notifications: { dataOne, dataTwo } });
+        this.setState({ isSelectAll: !checked, notifications: { dataOne, dataTwo } });
     }
 
     render() {
@@ -179,14 +157,19 @@ export default class TabView extends Component {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <Text onPress={() => this.setState({ isShow: !this.state.isShow })}>Delete</Text>
-                    <Text onPress={this.handleSelectAll}>Delete All</Text>
+                    <View style = {{ flexDirection : 'row', justifyContent : 'space-between', paddingHorizontal : 16}}>
+                        <Button contentStyle = {{height : 30}} style = {{height : 30}} uppercase = {false} icon = 'done-all' color = '#48d9d9'  mode="contained" onPress={() => this.handleSelectAll(this.state.isSelectAll)}>Select All</Button>
+                        <Button contentStyle = {{height : 30}} style = {{height : 30}} uppercase = {false} icon = 'delete' color = 'red' mode="contained" onPress={() => this.setState({ isShow: !this.state.isShow })}>
+                            Delete
+                        </Button >
+                        
+                    </View>
                     <ScrollView>
-                        <View style = {{paddingHorizontal : 16}}>
-                            {notifications.map(item => {
+                        <View style={{ paddingHorizontal: 16 }}>
+                            {notifications.map((item, index) => {
 
                                 return (
-                                    <View style={styles.container}>
+                                    <View style={styles.container} key={index}>
                                         <View style={styles.wraptime}>
                                             <View style={styles.timeRow}>
                                                 <View style={this.state.isShow ? [styles.startday, styles.active] : styles.startday}>
@@ -200,13 +183,13 @@ export default class TabView extends Component {
                                                 <View style={styles.endday}>
                                                     <TouchableOpacity activeOpacity={0.3}>
                                                         <Text style={styles.textDay} >{item.content}</Text>
-                                                        <Text>8 mins ago</Text>
+                                                        <Text style={styles.timeNotifi}>8 mins ago</Text>
                                                     </TouchableOpacity>
                                                 </View>
 
                                             </View>
                                             <View style={styles.statusRow}>
-                                                <Badge warning>
+                                                <Badge info>
                                                     <Text>new</Text>
                                                 </Badge>
                                             </View>
@@ -252,10 +235,8 @@ const styles = StyleSheet.create({
         borderRadius: 4,
     },
     container: {
-        paddingTop: 10,
+        marginTop: 5,
         padding: 10,
-        borderBottomWidth: 2,
-        borderBottomColor: '#ccc',
         shadowColor: '#000',
         backgroundColor: '#f7f7f7',
         shadowRadius: 10,
@@ -273,7 +254,6 @@ const styles = StyleSheet.create({
         display: 'none'
     },
     endday: {
-        paddingLeft: 50,
         width: '80%'
     },
     timeRow: {
@@ -283,11 +263,16 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     textDay: {
-        color: '#48d9d9',
+        fontSize : 16
 
     },
     active: {
-        display: 'flex'
+        display: 'flex',
+        marginRight : 30
+    },
+    timeNotifi : {
+        fontSize : 12,
+        color : 'grey'
     }
 
 })
