@@ -16,8 +16,6 @@ export default class ListMenu extends Component {
                         <Text style={styles.textMenu}>{menuItem.item.name}</Text>
                         { menuItem.item.router == 'Notification' ? <Badge><Text>2</Text></Badge> : <Text></Text>}
                     </View>
-               
-                    
                 </TouchableOpacity>
             </View>
 

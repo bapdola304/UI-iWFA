@@ -4,21 +4,15 @@ import Notification from '../components/Notification'
 import TabView from '../components/TabView'
 
 let data = [
-  { id: 1, content: 'asdasdasdasdasdasas' },
-  { id: 2, content: '11111111111asdasdasdasd' },
-  { id: 3, content: '334343242342sfdssfsdfsdfsdfsd' },
-  { id: 3, content: '334343242342sfdssfsdfsdfsdfsd' },
-  { id: 3, content: '334343242342sfdssfsdfsdfsdfsd' },
-  { id: 3, content: '334343242342sfdssfsdfsdfsdfsd' },
-  { id: 3, content: '334343242342sfdssfsdfsdfsdfsd' },
-  { id: 3, content: '334343242342sfdssfsdfsdfsdfsd' },
-  { id: 3, content: '334343242342sfdssfsdfsdfsdfsd' },
-  { id: 3, content: '334343242342sfdssfsdfsdfsdfsd' }
+  { id: 1, content: 'asdasdasdasdasdasas', isSelected : false , type : 'confirm'},
+  { id: 2, content: '11111111111asdasdasdasd', isSelected : false ,type : 'confirm' },
+  { id: 3, content: '334343242342sfdssfsdfsdfsdfsd' , isSelected : false, type : 'confirm' },
+
 ]
 let data2 = [
-  { id: 1, content: '99999999999999999999999999' },
-  { id: 2, content: '88888888888888888888888' },
-  { id: 3, content: '777777777777777777777777' }
+  { id: 1, content: '3243423423423', isSelected : false , type : 'infor'},
+  { id: 2, content: '546777777777777', isSelected : false ,type : 'infor' },
+  { id: 3, content: '000000978787878' , isSelected : false, type : 'infor' },
 ]
 class NotificationsScreen extends Component {
   static navigationOptions = {
@@ -31,6 +25,7 @@ class NotificationsScreen extends Component {
     return (
 
       <TabView
+        data = {{dataOne : data, dataTwo  : data2}}
         dataOne={data}
         dataTwo={data2}
         tabOne={Notification}

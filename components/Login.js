@@ -53,8 +53,24 @@ class Login extends Component {
                         maxHeight={500}
                         underlineActiveColor='#48d9d9'
                         labelActiveColor='#48d9d9'
-                        onChangeText={(username) => {
-                            let error = loginValidate(username,'Username');
+                        onChangeText={
+                            (username) => {
+                                let error = loginValidate(username,'Username');
+                                this.setState({ username })
+                                if (Object.keys(error).length > 0) {                               
+                                    this.setState({
+                                        errorUsername: error.Username
+                                    });
+                                    
+                                }else{
+                                    this.setState({
+                                        errorUsername: null
+                                    });
+                                }
+                            }
+                        }
+                        onBlur = {(username) => {
+                            let error = loginValidate(this.state.username,'Username');
                             console.log(error);
                             
                             if (Object.keys(error).length > 0) {                               
@@ -62,14 +78,9 @@ class Login extends Component {
                                     errorUsername: error.Username
                                 });
                                 
-                            }else{
-                                this.setState({
-                                    errorUsername: null
-                                });
                             }
-                        }
-                        }
-                        error = {errorUsername ? errorUsername : false}                      
+                        }}
+                        error = {errorUsername ? errorUsername : false}                   
 
                     />
                     <Reinput
@@ -81,6 +92,33 @@ class Login extends Component {
                         labelActiveColor='#48d9d9'
                         onChangeText={(password) => this.setState({ password })}
                         secureTextEntry={true}
+                        onChangeText={
+                            (password) => {
+                                let error = loginValidate(password,'Password');
+                                this.setState({ password })
+                                if (Object.keys(error).length > 0) {                               
+                                    this.setState({
+                                        errorPassword: error.Password
+                                    });
+                                    
+                                }else{
+                                    this.setState({
+                                        errorPassword: null
+                                    });
+                                }
+                            }
+                        }
+                        onBlur = {(username) => {
+                            let error = loginValidate(this.state.password,'password');
+                            console.log(error);
+                            
+                            if (Object.keys(error).length > 0) {                               
+                                this.setState({
+                                    errorPassword: error.password
+                                });
+                                
+                            }
+                        }}
                         error = {errorPassword ? errorPassword : false} 
                     />
                    

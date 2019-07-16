@@ -101,7 +101,7 @@ const RootStack = createStackNavigator({
   Notification : { screen : Notification }
 },
 {
-  initialRouteName: 'Login',
+  initialRouteName: 'Home',
   transitionConfig: TransitionConfiguration
 });
 //   const HomeStack = createStackNavigator({

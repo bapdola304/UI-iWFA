@@ -1,14 +1,14 @@
 export default  validate = (values, type) => {
     console.log(values);
-    alph = /^[a-zA-Z0-9]+$/
+    alph = /^[a-z0-9_-]{3,60}$/
     const error= {};
     if(!values){
-        error[type] = type + ' is required';
+        error[type] = type + ' can only contain: a-z, 0-9 and must has between 3 and 60 characters';
     }
 
     if(!alph.test(values)){
        
-            error[type] = type + ' must not char spec';
+            error[type] = type + ' can only contain: a-z, 0-9 and must has between 3 and 60 characters';
     }
    
     return error;

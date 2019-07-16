@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, Button, TouchableHighlight, Alert } from 'react-native'
-import { Container, Header, Content, Card, CardItem, Text, Badge, Left, Right, Thumbnail, Icon } from 'native-base';
+import { Container, Header, Content, Card, CardItem, Text, Badge, Left, Right, Thumbnail, Icon, CheckBox } from 'native-base';
 import Modal from 'react-native-modalbox';
 import Swipeout from 'react-native-swipeout';
 
 export default class Notification extends Component {
+    state = {
+        checked : false,
+        isShow : false
+    }
     onPress = () =>{
-        Alert.alert('Alert', 
+        Alert.alert('Alert',
         'Are you sure want to delete?',
         [
             {text : 'No', onPress : () => console.log('cancel'), style : 'cancel'},
             {text : 'Yes', onPress : () => console.log(this.props.dataNotifi.item.content)}
         ]
         )
+    }
+    componentWillReceiveProps(props) {
+        this.setState({ isShow : props.isShow});
     }
     render() {
         let id = 2;
@@ -26,20 +33,30 @@ export default class Notification extends Component {
                 }
             ]
         }
+        console.log(this.props.isShow);
         return (
+        
+            
             <Swipeout {...swipeSetting}>
-            <TouchableOpacity activeOpacity={0.3}>
+            
                 <View style={styles.container}>
                     <View style={styles.wraptime}>
                         <View style={styles.timeRow}>
-                            <View style={styles.startday}>
-                                <Image source = {{uri : 'https://avatars2.githubusercontent.com/u/1203949?s=180&v=4'}} style = {{width : 50, height : 50}}/>
+                            <View style={this.state.isShow ? [styles.startday, styles.active] : styles.startday}>
+                            <CheckBox
+                                checked={this.state.checked}
+                                onPress={() => this.setState({ checked: !this.state.checked })}
+                                color="#48d9d9"
+                            />
                             </View>
-
+                            
                             <View style={styles.endday}>
+                            <TouchableOpacity activeOpacity={0.3}>
                                 <Text style={styles.textDay} >{this.props.dataNotifi.item.content}</Text>
                                 <Text>8 mins ago</Text>
+                                </TouchableOpacity>
                             </View>
+                           
                         </View>
                         <View style={styles.statusRow}>
                             <Badge warning>
@@ -50,7 +67,7 @@ export default class Notification extends Component {
                 </View>
 
                
-            </TouchableOpacity>
+            
             </Swipeout>
 
 
@@ -68,7 +85,8 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.5,
-        elevation: 1
+        elevation: 1,
+        paddingHorizontal : 8
 
     },
     wraptime: {
@@ -76,11 +94,11 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     startday: {
-        paddingHorizontal: 8
+        display : 'none'
     },
     endday: {
-        paddingHorizontal: 8,
-        width : '80%'
+        paddingLeft : 50,
+        width : '80%' 
     },
     timeRow: {
         flex: 1,
@@ -92,5 +110,8 @@ const styles = StyleSheet.create({
         color: '#48d9d9',
     
     },
+    active : {
+        display : 'flex'
+    }
     
 })

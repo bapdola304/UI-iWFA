@@ -7,9 +7,11 @@ import {
     ScrollView,
     Image,
     Dimensions,
-    FlatList
+    FlatList,
+    StyleSheet
 } from "react-native";
-
+import { Badge, CheckBox } from 'native-base';
+import Notification from '../components/Notification'
 const { width } = Dimensions.get("window");
 
 export default class TabView extends Component {
@@ -18,12 +20,12 @@ export default class TabView extends Component {
         xTabOne: 0,
         xTabTwo: 0,
         translateX: new Animated.Value(0),
-        translateXTabOne: new Animated.Value(0),
-        translateXTabTwo: new Animated.Value(width),
-        translateY: -1000
+        data: { dataOne: [], dataTwo: [] },
+        notificationType: 'confirm',
+        isShow: false
     };
 
-    handleSlide = type => {
+    handleSlide = (type, notificationType) => {
         let {
             active,
             xTabOne,
@@ -59,64 +61,87 @@ export default class TabView extends Component {
                 }).start()
             ]);
         }
+        this.setState({ notificationType, data: this.props.data });
     };
+    componentWillMount() {
+        this.setState({
+            data: this.props.data
+        });
+    }
+    handleSelectNotification = (notification) => {
+        let notifications = this.state.data;
+        let { dataOne, dataTwo } = notifications;
+        let updateSelected = (items = []) => {
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].id == notification.id) {
+                    items[i].isSelected = !notification.isSelected;
+                    break;
+                }
+            }
+            return items;
+        }
+        switch (notification.type) {
+            case 'confirm':
+                confirmations = updateSelected(dataOne);
+                break;
+            case 'infor':
+                informations = updateSelected(dataTwo);
+                break;
+        }
+        this.setState({ notifications: { dataOne, dataTwo } });
+    }
+    handleRemoveNotifications(notifications) {
+        // let itemChecked = [];
+        // _.map(notifications, items => {
+        //     if (items.isSelected)
+        //         itemChecked.push(items.id);
+        // });
+        // this.props.notificationActions.deleteNotifications(itemChecked);
+    }
+    handleSelectAll(checked = false) {
+        let notifications = this.state.data;
+        let { dataOne, dataTwo } = notifications;
+        let updateSelected = (items = []) => {
+            for (let i = 0; i < items.length; i++) {
+                items[i].isSelected = !checked;
+            }
+            return items;
+        }
+       switch (this.state.notificationType) {
+            case 'confirm':
+                confirmations = updateSelected(dataOne);
+                break;
+            case 'infor':
+                informations = updateSelected(dataTwo);
+                break;
+        }
+        this.setState({ isSelectAll: checked, notifications: { dataOne, dataTwo } });
+    }
 
     render() {
         let {
             xTabOne,
             xTabTwo,
             translateX,
-            active,
-            translateXTabOne,
-            translateXTabTwo,
-            translateY
+            active
         } = this.state;
+        console.log(this.state.isShow);
+        let notifications = [];
+        switch (this.state.notificationType) {
+            case 'confirm':
+                notifications = this.state.data.dataOne;
+                break;
+            case 'infor':
+                notifications = this.state.data.dataTwo;
+                break;
+        }
         return (
             <View style={{ flex: 1 }}>
                 <View
-                    style={{
-                        width: "90%",
-                        marginLeft: "auto",
-                        marginRight: "auto"
-                    }}
                 >
-                    <View
-                        style={{
-                            flexDirection: "row",
-                            marginTop: 20,
-                            marginBottom: 10,
-                            height: 36,
-                            position: "relative"
-                        }}
-                    >
-                        <Animated.View
-                            style={{
-                                position: "absolute",
-                                width: "50%",
-                                height: "100%",
-                                top: 0,
-                                left: 0,
-                                backgroundColor: "#007aff",
-                                borderRadius: 4,
-                                transform: [
-                                    {
-                                        translateX
-                                    }
-                                ]
-                            }}
-                        />
-                        <TouchableOpacity
-                            style={{
-                                flex: 1,
-                                justifyContent: "center",
-                                alignItems: "center",
-                                borderWidth: 1,
-                                borderColor: "#007aff",
-                                borderRadius: 4,
-                                borderRightWidth: 0,
-                                borderTopRightRadius: 0,
-                                borderBottomRightRadius: 0
-                            }}
+                    <View style={styles.wrapTab}>
+                        <Animated.View style={[styles.animationTab, { transform: [{ translateX }] }]} />
+                        <TouchableOpacity style={styles.touchTab}
                             onLayout={event =>
                                 this.setState({
                                     xTabOne: event.nativeEvent.layout.x
@@ -124,30 +149,16 @@ export default class TabView extends Component {
                             }
                             onPress={() =>
                                 this.setState({ active: 0 }, () =>
-                                    this.handleSlide(xTabOne)
+                                    this.handleSlide(xTabOne, 'confirm')
                                 )
                             }
                         >
-                            <Text
-                                style={{
-                                    color: active === 0 ? "#fff" : "#48d9d9"
-                                }}
-                            >
+                            <Text style={{ color: active === 0 ? "#fff" : "#48d9d9" }}>
                                 {this.props.tabOneText}
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            style={{
-                                flex: 1,
-                                justifyContent: "center",
-                                alignItems: "center",
-                                borderWidth: 1,
-                                borderColor: "#007aff",
-                                borderRadius: 4,
-                                borderLeftWidth: 0,
-                                borderTopLeftRadius: 0,
-                                borderBottomLeftRadius: 0
-                            }}
+                            style={styles.touchTab}
                             onLayout={event =>
                                 this.setState({
                                     xTabTwo: event.nativeEvent.layout.x
@@ -155,7 +166,7 @@ export default class TabView extends Component {
                             }
                             onPress={() =>
                                 this.setState({ active: 1 }, () =>
-                                    this.handleSlide(xTabTwo)
+                                    this.handleSlide(xTabTwo, 'infor')
                                 )
                             }
                         >
@@ -168,59 +179,115 @@ export default class TabView extends Component {
                             </Text>
                         </TouchableOpacity>
                     </View>
-
+                    <Text onPress={() => this.setState({ isShow: !this.state.isShow })}>Delete</Text>
+                    <Text onPress={this.handleSelectAll}>Delete All</Text>
                     <ScrollView>
-                        { active === 0 ?
-                        
-                        <Animated.View
-                            style={{
+                        <View style = {{paddingHorizontal : 16}}>
+                            {notifications.map(item => {
 
-                                transform: [
-                                    {
-                                        translateX: translateXTabOne
-                                    }
-                                ]
-                            }}
-                            onLayout={event =>
-                                this.setState({
-                                    translateY: event.nativeEvent.layout.height
-                                })
+                                return (
+                                    <View style={styles.container}>
+                                        <View style={styles.wraptime}>
+                                            <View style={styles.timeRow}>
+                                                <View style={this.state.isShow ? [styles.startday, styles.active] : styles.startday}>
+                                                    <CheckBox
+                                                        checked={item.isSelected}
+                                                        color="#48d9d9"
+                                                        onPress={() => this.handleSelectNotification(item)}
+                                                    />
+                                                </View>
+
+                                                <View style={styles.endday}>
+                                                    <TouchableOpacity activeOpacity={0.3}>
+                                                        <Text style={styles.textDay} >{item.content}</Text>
+                                                        <Text>8 mins ago</Text>
+                                                    </TouchableOpacity>
+                                                </View>
+
+                                            </View>
+                                            <View style={styles.statusRow}>
+                                                <Badge warning>
+                                                    <Text>new</Text>
+                                                </Badge>
+                                            </View>
+                                        </View>
+                                    </View>
+                                )
+                            })
                             }
-                        >
-                            <Text>Select</Text>
-                            {<FlatList
+                        </View>
 
-                                data={this.props.dataOne}
-                                renderItem={(item) =>
-                                    <this.props.tabOne dataNotifi={item} onPress={this.props.onPress} />
-                                }
-
-                            />}
-                        </Animated.View>
-                        :
-                        <Animated.View
-                            style={{
-                           
-                                transform: [
-                                    {
-                                        translateX: translateXTabTwo
-                                    }
-                                ]
-                            }}
-                        >
-                            {<FlatList
-
-                                data={this.props.dataTwo}
-                                renderItem={(item) =>
-                                    <this.props.tabOne dataNotifi={item} />
-                                }
-
-                            />}
-                        </Animated.View>
-                        }
                     </ScrollView>
                 </View>
             </View>
         );
     }
 }
+const styles = StyleSheet.create({
+    wrapTab: {
+        flexDirection: "row",
+        marginTop: 20,
+        marginBottom: 10,
+        height: 36,
+        position: "relative",
+        width: '90%',
+        marginLeft: "auto",
+        marginRight: "auto"
+    },
+    animationTab: {
+        position: "absolute",
+        width: "50%",
+        height: "100%",
+        top: 0,
+        left: 0,
+        backgroundColor: "#007aff",
+        borderRadius: 4,
+    },
+    touchTab: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        borderWidth: 1,
+        borderColor: "#007aff",
+        borderRadius: 4,
+    },
+    container: {
+        paddingTop: 10,
+        padding: 10,
+        borderBottomWidth: 2,
+        borderBottomColor: '#ccc',
+        shadowColor: '#000',
+        backgroundColor: '#f7f7f7',
+        shadowRadius: 10,
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.5,
+        elevation: 1,
+        paddingHorizontal: 16
+
+    },
+    wraptime: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    startday: {
+        display: 'none'
+    },
+    endday: {
+        paddingLeft: 50,
+        width: '80%'
+    },
+    timeRow: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
+    textDay: {
+        color: '#48d9d9',
+
+    },
+    active: {
+        display: 'flex'
+    }
+
+})
