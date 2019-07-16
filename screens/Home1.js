@@ -12,6 +12,8 @@ export default class Home1 extends Component {
         header: null
     };
     onRiderect = (router) => {
+        console.log(router);
+        
         this.props.navigation.navigate(router)
     }
     render() {
