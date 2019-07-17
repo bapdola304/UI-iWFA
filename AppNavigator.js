@@ -11,6 +11,7 @@ import LeaveRequest from './screens//menudetail/LeaveRequestScreen'
 import ClockTime from './screens/ClockTime'
 import Notification from './screens/NotificationsScreen'
 import MySchedule from './screens/Mychedule'
+import NotificationDetail from './screens/NotificationDetail'
 const HomeStack = createStackNavigator({
   HomeTab
 },
@@ -100,7 +101,8 @@ const RootStack = createStackNavigator({
   LeaveRequest : { screen : LeaveRequest },
   ClockTime : { screen : ClockTime },
   Notification : { screen : Notification },
-  MySchedule : { screen : MySchedule }
+  MySchedule : { screen : MySchedule },
+  NotificationDetail : { screen : NotificationDetail }
 },
 {
   initialRouteName: 'Home',

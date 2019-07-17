@@ -21,6 +21,11 @@ class NotificationsScreen extends Component {
     },
     title: 'Notifications'
   };
+  onGoToDetail = (item) =>{
+    this.props.navigation.navigate('NotificationDetail')
+    console.log(item);
+    
+  }
   render() {
     return (
 
@@ -33,6 +38,7 @@ class NotificationsScreen extends Component {
         tabName = {['Confirmation','Information']}
         tabOneText = 'Confirmation'
         tabTwoText = 'Information'
+        onPress = {(item) => this.onGoToDetail(item)}
       />
 
 

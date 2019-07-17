@@ -7,9 +7,24 @@ import logo from '../assets/menuicon/alarm-clock.png'
 import back from '../assets/background_login.png'
 import br from '../assets/br15.jpg'
 var { height, width } = Dimensions.get('screen');
+const ImageHeader = props => {
+    return(
+      <View style={{height: 100, justifyContent: 'flex-end', padding: 5, backgroundColor: 'transparent'}}>
+        <Image
+          style={{width, height: 100, position: 'absolute', top: 0, left: 0}}
+          source={back}
+          resizeMode="cover"
+        />
+        
+      </View>
+    );
+  }
 export default class Home1 extends Component {
+    
     static navigationOptions = {
-        header: null
+   
+        headerStyle: { backgroundColor: '#48d9d9', opacity: 1},
+        title: 'Welcome'
     };
     onRiderect = (router) => {
         console.log(router);
@@ -36,7 +51,7 @@ export default class Home1 extends Component {
 
 
             <ScrollView style={[styles.fixedList]}>
-                <View style={{ paddingHorizontal: 8, marginTop : 30}}>
+                <View style={{ paddingHorizontal: 8, marginTop : 5}}>
                     <FlatList
                         numColumns={2}
                         data={dataListMenu}
@@ -154,7 +169,7 @@ const styles = StyleSheet.create({
     },
     fixedList: {
         position: 'absolute',
-        top: '10%',
+        top: 10,
         left: 0,
         right: 0,
         bottom: 0,

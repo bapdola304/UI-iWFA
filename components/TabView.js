@@ -12,10 +12,10 @@ import {
 
 } from "react-native";
 import { Badge, CheckBox } from 'native-base';
-import { Button } from 'react-native-paper';
+import { Button, IconButton } from 'react-native-paper';
 
 import Notification from '../components/Notification'
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 export default class TabView extends Component {
     state = {
@@ -113,8 +113,10 @@ export default class TabView extends Component {
                 notifications = this.state.data.dataTwo;
                 break;
         }
+        let { onPress } = this.props;
         return (
-            <View style={{ flex: 1 }}>
+         
+            <View style={{ backgroundColor : "#f7f7f7", height : '100%' }}>
                 <View
                 >
                     <View style={styles.wrapTab}>
@@ -181,15 +183,16 @@ export default class TabView extends Component {
                                                 </View>
 
                                                 <View style={styles.endday}>
-                                                    <TouchableOpacity activeOpacity={0.3}>
+                                                    <TouchableOpacity activeOpacity={0.3} onPress = {() => onPress(item)}>
                                                         <Text style={styles.textDay} >{item.content}</Text>
-                                                        <Text style={styles.timeNotifi}>8 mins ago</Text>
+                                                        <IconButton icon = 'access-time' size={8}/>
+                                                       <Text style={styles.timeNotifi}>8 mins ago</Text>
                                                     </TouchableOpacity>
                                                 </View>
 
                                             </View>
                                             <View style={styles.statusRow}>
-                                                <Badge info>
+                                                <Badge warning>
                                                     <Text>new</Text>
                                                 </Badge>
                                             </View>
@@ -215,7 +218,7 @@ const styles = StyleSheet.create({
         position: "relative",
         width: '90%',
         marginLeft: "auto",
-        marginRight: "auto"
+        marginRight: "auto",
     },
     animationTab: {
         position: "absolute",
@@ -237,13 +240,15 @@ const styles = StyleSheet.create({
     container: {
         marginTop: 5,
         padding: 10,
+        paddingHorizontal: 16,
+        borderWidth: 1,
+        borderColor: '#fff',
         shadowColor: '#000',
-        backgroundColor: '#f7f7f7',
-        shadowRadius: 10,
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.5,
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
         elevation: 1,
-        paddingHorizontal: 16
+        backgroundColor : '#fff'
 
     },
     wraptime: {
