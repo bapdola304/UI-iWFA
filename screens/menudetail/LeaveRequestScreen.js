@@ -32,27 +32,27 @@ class LeaveRequestScreen extends Component {
     render() {
         let data = [{
             value: 'Banana',
-          }, {
+        }, {
             value: 'Mango',
-          }, {
+        }, {
             value: 'Pear',
-          }];
+        }];
         return (
             <View style={styles.container}>
-                <Image  source = {br} style = {{height : height/6, width : '100%'}}/>
-             
-                    {/* <View style={{ padding: 20, backgroundColor: '#ccc', position : 'absolute', top : '10%', width : '100%' }}>
+                {/* <Image source={br} style={{ height: height / 6, width: '100%' }} /> */}
+
+                {/* <View style={{ padding: 20, backgroundColor: '#ccc', position : 'absolute', top : '10%', width : '100%' }}>
                         <Text>Hours Avaiable</Text>
                     </View> */}
-             <View style = {{position : 'absolute', width : '100%', height : height,  paddingHorizontal : 20, backgroundColor : '#f7f7f7', top : '15%', borderTopLeftRadius : 30, borderTopRightRadius : 30}}>
-                <View style={styles.paddingTop20}>
-                    <Text style = {{textAlign : 'center', fontSize : 16, fontWeight : 'bold'}}>Hours Avaiable 100.0</Text>
-                    {/* <Text style={styles.textDate}>Leave Type *</Text> */}
-                    <Dropdown
-                        label='Leave Type *'
-                        data={data}
-                    />
-                    {/* <Item picker style={{ borderStyle: 'dashed' }}>
+                <View style = {{height : '80%'}}>
+                    <View style={styles.paddingTop20}>
+                        <Text style={{ textAlign: 'center', fontSize: 16, fontWeight: 'bold' }}>Hours Avaiable 100.0</Text>
+                        {/* <Text style={styles.textDate}>Leave Type *</Text> */}
+                        <Dropdown
+                            label='Leave Type *'
+                            data={data}
+                        />
+                        {/* <Item picker style={{ borderStyle: 'dashed' }}>
                         <Picker
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}
@@ -71,89 +71,93 @@ class LeaveRequestScreen extends Component {
                         </Picker>
                     </Item> */}
 
-                </View>
-                <View style={styles.dateRow}>
+                    </View>
+                    <View style={styles.dateRow}>
 
-                    <DatePicker
-                        style={styles.dataPickerRow}
-                        date={this.state.startDate} //initial date from state
-                        mode="date" //The enum of date, datetime and time
-                        placeholder="Start Date *"
-                        format="DD-MM-YYYY"
-                        confirmBtnText="Confirm"
-                        cancelBtnText="Cancel"
-                        customStyles={styleInputDate}
-                        onDateChange={(date) => { this.setState({ startDate: date }) }}
-                        iconSource={require('../../assets/icon/car.png')}
-                    />
-                    <DatePicker
-                        style={styles.dataPickerRow}
-                        date={this.state.startTime} //initial date from state
-                        mode="time" //The enum of date, datetime and time
-                        placeholder="Start Time *"
-                        confirmBtnText="Confirm"
-                        cancelBtnText="Cancel"
-                        customStyles={styleInputDate}
-                        onDateChange={(date) => { this.setState({ startTime: date }) }}
-                        iconSource={require('../../assets/icon/clock.png')}
-                    />
+                        <DatePicker
+                            style={styles.dataPickerRow}
+                            date={this.state.startDate} //initial date from state
+                            mode="date" //The enum of date, datetime and time
+                            placeholder="Start Date *"
+                            format="DD-MM-YYYY"
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            customStyles={styleInputDate}
+                            onDateChange={(date) => { this.setState({ startDate: date }) }}
+                            iconSource={require('../../assets/icon/car.png')}
+                        />
+                        <DatePicker
+                            style={styles.dataPickerRow}
+                            date={this.state.startTime} //initial date from state
+                            mode="time" //The enum of date, datetime and time
+                            placeholder="Start Time *"
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            customStyles={styleInputDate}
+                            onDateChange={(date) => { this.setState({ startTime: date }) }}
+                            iconSource={require('../../assets/icon/clock.png')}
+                        />
 
-                </View>
-                <View style={styles.dateRow}>
-                    <DatePicker
-                        style={styles.dataPickerRow}
-                        date={this.state.endDate} //initial date from state
-                        mode="date" //The enum of date, datetime and time
-                        placeholder="End Date *"
-                        format="DD-MM-YYYY"
-                        confirmBtnText="Confirm"
-                        cancelBtnText="Cancel"
-                        minDate={this.state.startDate}
-                        customStyles={styleInputDate}
-                        onDateChange={(date) => { this.setState({ endDate: date }) }}
-                        iconSource={require('../../assets/icon/car.png')}
-                    />
-                    <DatePicker
-                        style={styles.dataPickerRow}
-                        date={this.state.endTime} //initial date from state
-                        mode="time" //The enum of date, datetime and time
-                        placeholder="End Time *"
-                        confirmBtnText="Confirm"
-                        cancelBtnText="Cancel"
-                        minDate={this.state.startTime}
-                        customStyles={styleInputDate}
-                        onDateChange={(date) => { this.setState({ endTime: date }) }}
-                        iconSource={require('../../assets/icon/clock.png')}
-                    />
-                </View>
-                <View>
-                    <Item stackedLabel>
-                        <Label style={{ fontSize: 12, color: 'grey' }}>Leave Hours</Label>
-                        <Input disabled value='24.0' />
-                    </Item>
+                    </View>
+                    <View style={styles.dateRow}>
+                        <DatePicker
+                            style={styles.dataPickerRow}
+                            date={this.state.endDate} //initial date from state
+                            mode="date" //The enum of date, datetime and time
+                            placeholder="End Date *"
+                            format="DD-MM-YYYY"
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            minDate={this.state.startDate}
+                            customStyles={styleInputDate}
+                            onDateChange={(date) => { this.setState({ endDate: date }) }}
+                            iconSource={require('../../assets/icon/car.png')}
+                        />
+                        <DatePicker
+                            style={styles.dataPickerRow}
+                            date={this.state.endTime} //initial date from state
+                            mode="time" //The enum of date, datetime and time
+                            placeholder="End Time *"
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            minDate={this.state.startTime}
+                            customStyles={styleInputDate}
+                            onDateChange={(date) => { this.setState({ endTime: date }) }}
+                            iconSource={require('../../assets/icon/clock.png')}
+                        />
+                    </View>
+                    <View>
+                        <Item stackedLabel>
+                            <Label style={{ fontSize: 12, color: 'grey' }}>Leave Hours</Label>
+                            <Input disabled value='24.0' />
+                        </Item>
 
-                    <Item stackedLabel>
-                        <Label style={{ fontSize: 12, color: 'grey' }}>Approver</Label>
-                        <Input disabled value='Dinh Hang T9' />
-                    </Item>
+                        <Item stackedLabel>
+                            <Label style={{ fontSize: 12, color: 'grey' }}>Approver</Label>
+                            <Input disabled value='Dinh Hang T9' />
+                        </Item>
 
-                </View>
-                <Button
-                    style={styles.button}
-                    onPress={this.onLogin}
-                    title="Submit"
-                    color="#48d9d9"
-                    borderRadius={20}
-                />
-            </View>
+                    </View>
+                    </View>
+                    <View style={{ justifyContent: 'flex-end',  height: '10%' }}>
+                        <Button
+                            style={styles.button}
+                            onPress={this.onLogin}
+                            title="Submit"
+                            color="#48d9d9"
+                            borderRadius={20}
+                        />
+                    </View>
+               
             </View>
         );
     }
 }
 const styles = StyleSheet.create({
     container: {
-        flex : 1,
-        alignItems : 'center'
+        width: '100%',
+        height: '100%',
+        paddingHorizontal: 8
     },
     dateRow: {
         flexDirection: 'row'
@@ -179,11 +183,11 @@ const styles = StyleSheet.create({
     paddingTop20: {
         paddingTop: 20
     },
-    button : {
-        height : 50,
-        marginTop : 30,
-        position : 'absolute',
-        bottom : 0
+    button: {
+        height: 50,
+        marginTop: 30,
+        position: 'absolute',
+        bottom: 0
     }
 })
 const styleInputDate = {

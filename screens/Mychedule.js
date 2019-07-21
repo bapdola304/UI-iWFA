@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 import { Agenda } from 'react-native-calendars';
 class Mychedule extends Component {
-
+    static navigationOptions = {
+        headerStyle: {
+         
+        },
+       title : 'My Chedules'
+      };
     constructor(props) {
         super(props);
         this.state = {
@@ -14,7 +19,7 @@ class Mychedule extends Component {
         <Agenda
             items={this.state.items}
             loadItemsForMonth={this.loadItems.bind(this)}
-            selected={'2019-07-15'}
+            selected={new Date()}
             renderItem={this.renderItem.bind(this)}
             renderEmptyDate={this.renderEmptyDate.bind(this)}
             rowHasChanged={this.rowHasChanged.bind(this)}
